@@ -1,0 +1,51 @@
+apply plugin: 'java'
+
+apply plugin: 'eclipse'
+
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+
+	repositories {
+	    mavenCentral()
+	}
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+    }
+}
+apply plugin: 'spring-boot'
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-jersey:1.2.2.RELEASE")
+    compile("com.google.guava:guava:18.0")
+    compile("io.reactivex:rxjava:1.0.0")
+    compile("com.typesafe:config:1.2.1")
+    compile("net.hamnaberg.rest:json-collection:3.0.0")
+    testCompile("junit:junit:4.12")
+    testCompile("org.springframework:spring-test:4.1.6.RELEASE")
+}
+
+war {
+	rootSpec.exclude('**/scannotation-1.0.3.jar')
+	rootSpec.exclude('**/resteasy-jaxrs-2.3.0.GA.jar')
+	rootSpec.exclude('**/jsr250-api-1.0.jar')
+	rootSpec.exclude('**/jaxrs-api-2.3.0.GA.jar')
+	rootSpec.exclude('**/activation-1.1.jar')
+	rootSpec.exclude('**/jcip-annotations-1.0.jar')
+	rootSpec.exclude('**/httpclient-4.1.2.jar')
+	rootSpec.exclude('**/commons-httpclient-3.1.jar')
+	rootSpec.exclude('**/javassist-3.12.1.GA.jar')
+	rootSpec.exclude('**/httpcore-4.1.2.jar')
+	rootSpec.exclude('**/commons-logging-1.1.1.jar')
+	rootSpec.exclude('**/commons-codec-1.4.jar')
+	archiveName("todo1_mediador2.war")
+}
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = '2.3.9'
+}
